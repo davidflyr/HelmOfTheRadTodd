@@ -16,10 +16,13 @@ public class SpriteSheet {
 	public static SpriteSheet spawn_level = new SpriteSheet("spawn_level.png", 48);
 	public static SpriteSheet projectile_wizard = new SpriteSheet("wizard.png", 48);
 	
-	public static SpriteSheet player = new SpriteSheet("player_sheet.png", 96);
-	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 3, 32);
-	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 3, 32);
-	public static SpriteSheet player_side = new SpriteSheet(player, 2, 0, 1, 3, 32);
+	public static SpriteSheet player = new SpriteSheet("player_skating.png", 96, 192);
+	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 6, 32);
+	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 6, 32);
+	public static SpriteSheet player_side = new SpriteSheet(player, 2, 0, 1, 6, 32);
+	
+	public static SpriteSheet frisbee = new SpriteSheet("frisbee.png", 48, 64);
+	public static SpriteSheet frisbee_anim = new SpriteSheet(frisbee, 0, 0, 1, 4, 16);
 	
 	private Sprite[] sprites;
 	

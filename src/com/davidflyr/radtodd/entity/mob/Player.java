@@ -1,8 +1,8 @@
 package com.davidflyr.radtodd.entity.mob;
 
 import com.davidflyr.radtodd.Game;
+import com.davidflyr.radtodd.entity.projectile.Frisbee;
 import com.davidflyr.radtodd.entity.projectile.Projectile;
-import com.davidflyr.radtodd.entity.projectile.WizardProjectile;
 import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.SpriteSheet;
@@ -12,16 +12,17 @@ import com.davidflyr.radtodd.input.Mouse;
 public class Player extends Mob {
 	
 	private Keyboard input;
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
-	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.player_side, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 6, 10);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 6, 10);
+	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.player_side, 32, 32, 6, 10);
 
 	private AnimatedSprite animSprite = null;
 	
-	private boolean walking = false;
-	
 	private int fireRate = 0;
 	private int speed = 2;
+	
+	private int prevX = 0;
+	private int prevY = speed;
 	
 	public Player(Keyboard input) {
 		this.input = input;
@@ -33,12 +34,11 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		animSprite = down;
-		fireRate = WizardProjectile.FIRE_RATE;
+		fireRate = Frisbee.FIRE_RATE;
 	}
 	
 	public void update() {
-		if (walking) animSprite.update();
-		else animSprite.setFrame(2);
+		animSprite.update();
 		
 		int xa = 0, ya = 0;
 		
@@ -63,9 +63,10 @@ public class Player extends Mob {
 		
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
-			walking = true;
+			prevX = xa;
+			prevY = ya;
 		} else {
-			walking = false;
+			move(prevX, prevY);
 		}
 		clear();
 		updateShooting();
@@ -85,7 +86,7 @@ public class Player extends Mob {
 			double dy = Mouse.getY() - Game.getWindowHeight()/2;
 			double dir = Math.atan2(dy, dx);
 			shoot(x, y, dir);
-			fireRate = WizardProjectile.FIRE_RATE;
+			fireRate = Frisbee.FIRE_RATE;
 		}
 		
 	}

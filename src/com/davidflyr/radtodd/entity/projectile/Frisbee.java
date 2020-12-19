@@ -1,19 +1,24 @@
 package com.davidflyr.radtodd.entity.projectile;
 
 import com.davidflyr.radtodd.entity.spawner.ParticleSpawner;
+import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
-import com.davidflyr.radtodd.graphics.Sprite;
+import com.davidflyr.radtodd.graphics.SpriteSheet;
 
-public class WizardProjectile extends Projectile {
+public class Frisbee extends Projectile {
 	
 	public static final int FIRE_RATE = 10;
-
-	public WizardProjectile(int x, int y, double dir) {
+	
+	private AnimatedSprite frisbee_anim = new AnimatedSprite(SpriteSheet.frisbee_anim, 16, 16, 4, 5);
+	private AnimatedSprite animSprite = null;
+	
+	public Frisbee(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 170;
-		speed = 4;
+		speed = 3;
 		damage = 20;
-		sprite = Sprite.projectile_wizard;
+		animSprite = frisbee_anim;
+		sprite = animSprite.getSprite();
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 	}
@@ -23,6 +28,9 @@ public class WizardProjectile extends Projectile {
 			level.add(new ParticleSpawner((int)x, (int)y, 20, 50, level));
 			remove();
 		}
+		
+		animSprite.update();
+		sprite = animSprite.getSprite();
 		move();
 	}
 	

@@ -1,8 +1,8 @@
 package com.davidflyr.radtodd.entity.mob;
 
 import com.davidflyr.radtodd.entity.Entity;
+import com.davidflyr.radtodd.entity.projectile.Frisbee;
 import com.davidflyr.radtodd.entity.projectile.Projectile;
-import com.davidflyr.radtodd.entity.projectile.WizardProjectile;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.Sprite;
 
@@ -36,7 +36,7 @@ public abstract class Mob extends Entity {
 	
 	public void shoot(int x, int y, double dir) {
 		//dir *= 180 / Math.PI;
-		Projectile p = new WizardProjectile(x, y, dir);
+		Projectile p = new Frisbee(x, y, dir);
 		level.add(p);
 	}
 	
