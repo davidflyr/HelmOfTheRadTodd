@@ -16,7 +16,7 @@ public class Player extends Mob {
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 6, 10);
 	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.player_side, 32, 32, 6, 10);
 
-	private AnimatedSprite animSprite = null;
+	private AnimatedSprite animSprite = down;
 	
 	private int fireRate = 0;
 	private int speed = 2;
@@ -94,7 +94,7 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		int flip = 0;
 		
-		if (dir == 3) flip = 1;
+		if (dir == Direction.LEFT) flip = 1;
 		
 		screen.renderMob(x - 16, y - 16, animSprite.getSprite(), flip);
 	}

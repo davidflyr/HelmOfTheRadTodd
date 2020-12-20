@@ -5,11 +5,12 @@ import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.Sprite;
 import com.davidflyr.radtodd.graphics.SpriteSheet;
 
-public class Dummy extends Mob {
+public class Chaser extends Mob {
+	
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 4, 10);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 4, 10);
-	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.dummy_side, 32, 32, 4, 10);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.chaser_down, 32, 32, 4, 10);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.chaser_up, 32, 32, 4, 10);
+	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.chaser_side, 32, 32, 4, 10);
 	
 	private AnimatedSprite animSprite = down;
 	private boolean walking = false;
@@ -18,13 +19,35 @@ public class Dummy extends Mob {
 	private int interval = 70;
 	private int xa = 1, ya = 0;
 	
-	public Dummy(int x, int y) {
+	Player player;
+	
+	public Chaser(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = Sprite.player_back;
 	}
 	
+	private void move() {
+		xa = 0;
+		ya = 0;
+		
+		player = level.getClientPlayer();
+		if (x < player.getX()) xa++;
+		if (x > player.getX()) xa--;
+		if (y < player.getY()) ya++;
+		if (y > player.getY()) ya--;
+		
+		if (xa !=0 || ya != 0) {
+			move(xa, ya);
+			walking = true;
+		} else {
+			walking = false;
+		}
+	}
+	
 	public void update() {
+		move();
+		
 		time++;
 		
 		if (walking) animSprite.update();
@@ -64,13 +87,6 @@ public class Dummy extends Mob {
 			animSprite = down;
 		}
 		
-		if (xa !=0 || ya != 0) {
-			move(xa, ya);
-			walking = true;
-		} else {
-			walking = false;
-		}
-		
 		sprite = animSprite.getSprite();
 		
 	}
@@ -82,5 +98,6 @@ public class Dummy extends Mob {
 		
 		screen.renderMob(x - 16, y - 16, animSprite.getSprite(), flip);
 	}
+
 
 }

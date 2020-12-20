@@ -9,8 +9,13 @@ import com.davidflyr.radtodd.graphics.Sprite;
 public abstract class Mob extends Entity {
 	
 	protected Sprite sprite;
-	protected int dir = 0;
 	protected boolean moving = false;
+	
+	protected enum Direction {
+		UP, RIGHT, DOWN, LEFT
+	}
+	
+	protected Direction dir;
 	
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -19,10 +24,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 		
-		if (xa > 0) dir = 1;
-		if (xa < 0) dir = 3;
-		if (ya > 0) dir = 2;
-		if (ya < 0) dir = 0;
+		if (xa > 0) dir = Direction.RIGHT;
+		if (xa < 0) dir = Direction.LEFT;
+		if (ya > 0) dir = Direction.DOWN;
+		if (ya < 0) dir = Direction.UP;
 		
 		if (!collision(xa, ya)) {
 			x += xa;

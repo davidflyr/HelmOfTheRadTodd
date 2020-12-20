@@ -21,6 +21,16 @@ public class SpriteSheet {
 	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 6, 32);
 	public static SpriteSheet player_side = new SpriteSheet(player, 2, 0, 1, 6, 32);
 	
+	public static SpriteSheet dummy = new SpriteSheet("player_sheet.png", 96, 128);
+	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0, 0, 1, 4, 32);
+	public static SpriteSheet dummy_up = new SpriteSheet(dummy, 1, 0, 1, 4, 32);
+	public static SpriteSheet dummy_side = new SpriteSheet(dummy, 2, 0, 1, 4, 32);
+	
+	public static SpriteSheet chaser = new SpriteSheet("chaser_sheet.png", 96, 128);
+	public static SpriteSheet chaser_down = new SpriteSheet(chaser, 0, 0, 1, 4, 32);
+	public static SpriteSheet chaser_up = new SpriteSheet(chaser, 1, 0, 1, 4, 32);
+	public static SpriteSheet chaser_side = new SpriteSheet(chaser, 2, 0, 1, 4, 32);
+	
 	public static SpriteSheet frisbee = new SpriteSheet("frisbee.png", 48, 64);
 	public static SpriteSheet frisbee_anim = new SpriteSheet(frisbee, 0, 0, 1, 4, 16);
 	

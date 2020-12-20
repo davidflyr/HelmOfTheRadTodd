@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.davidflyr.radtodd.entity.mob.Chaser;
 import com.davidflyr.radtodd.entity.mob.Dummy;
 
 public class SpawnLevel extends Level {
@@ -24,7 +25,8 @@ public class SpawnLevel extends Level {
 			e.printStackTrace();
 			System.out.println("Whoops! Couldn't load level file.");
 		}
-		add(new Dummy(20, 26));
+		add(new Dummy(24, 26));
+		add(new Chaser(22, 23));
 	}
 	
 	protected void generateLevel() {

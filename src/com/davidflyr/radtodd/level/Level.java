@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.davidflyr.radtodd.entity.Entity;
+import com.davidflyr.radtodd.entity.mob.Player;
 import com.davidflyr.radtodd.entity.particle.Particle;
 import com.davidflyr.radtodd.entity.projectile.Projectile;
 import com.davidflyr.radtodd.graphics.Screen;
@@ -19,6 +20,8 @@ public class Level {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
+	
+	private List<Player> players = new ArrayList<Player>();
 	
 	//public static Level spawn = new SpawnLevel("res/levels/spawn.png");
 	public static Level spawn = new SpawnLevel("spawn.png");
@@ -51,6 +54,9 @@ public class Level {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).update();
 		}
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).update();
+		}
 		remove();
 	}
 	
@@ -66,6 +72,10 @@ public class Level {
 		for (int i = 0; i < particles.size(); i++) {
 			if(particles.get(i).isRemoved()) 
 				particles.remove(i);
+		}
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i).isRemoved()) 
+				players.remove(i);
 		}
 	}
 	
@@ -108,6 +118,9 @@ public class Level {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).render(screen);
 		}
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).render(screen);
+		}
 	}
 	
 	public void add(Entity e) {
@@ -116,9 +129,42 @@ public class Level {
 			particles.add((Particle)e);
 		} else if (e instanceof Projectile) {
 			projectiles.add((Projectile) e);
-		}else {			
+		} else if (e instanceof Player) {
+			players.add((Player) e);
+		} else {			
 			entities.add(e);
 		}
+	}
+	
+	public List<Player> getPlayers() {
+		return players;
+	}
+	
+	public Player getPlayerAt(int index) {
+		return players.get(index);
+	}
+	
+	public Player getClientPlayer() {
+		return players.get(0);
+	}
+	
+	public List<Entity> getEntities(Entity e, int radius) {
+		List<Entity> result = new ArrayList<Entity>();
+		int ex = e.getX();
+		int ey = e.getY();
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			int x = entity.getX();
+			int y = entity.getY();
+			
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			
+			double distance = Math.sqrt((dx*dx) + (dy*dy));
+			if (distance <= radius) result.add(entity);
+		}
+		
+		return result;
 	}
 	
 	public Tile getTile(int x, int y) {
