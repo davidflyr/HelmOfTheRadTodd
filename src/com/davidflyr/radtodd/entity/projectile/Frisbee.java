@@ -14,7 +14,7 @@ public class Frisbee extends Projectile {
 	
 	public Frisbee(int x, int y, double dir) {
 		super(x, y, dir);
-		range = 170;
+		range = 1000;
 		speed = 3;
 		damage = 20;
 		animSprite = frisbee_anim;
