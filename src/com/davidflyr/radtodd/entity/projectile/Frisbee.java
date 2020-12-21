@@ -12,7 +12,7 @@ public class Frisbee extends Projectile {
 	private AnimatedSprite frisbee_anim = new AnimatedSprite(SpriteSheet.frisbee_anim, 16, 16, 4, 5);
 	private AnimatedSprite animSprite = null;
 	
-	public Frisbee(int x, int y, double dir) {
+	public Frisbee(double x, double y, double dir) {
 		super(x, y, dir);
 		range = 1000;
 		speed = 3;

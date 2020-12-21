@@ -16,11 +16,11 @@ public class Dummy extends Mob {
 	
 	private int time = 0;
 	private int interval = 70;
-	private int xa = 1, ya = 0;
+	private double xa = 1, ya = 0;
 	
-	public Dummy(int x, int y) {
-		this.x = x << 4;
-		this.y = y << 4;
+	public Dummy(double x, double y) {
+		this.x = x * 16;
+		this.y = y * 16;
 		sprite = Sprite.player_back;
 	}
 	
@@ -80,7 +80,7 @@ public class Dummy extends Mob {
 		
 		if (dir == Direction.LEFT) flip = 1;
 		
-		screen.renderMob(x - 16, y - 16, animSprite.getSprite(), flip);
+		screen.renderMob((int)x - 16, (int)y - 16, animSprite.getSprite(), flip);
 	}
 
 }

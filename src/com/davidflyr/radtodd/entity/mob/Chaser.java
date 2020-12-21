@@ -1,5 +1,7 @@
 package com.davidflyr.radtodd.entity.mob;
 
+import java.util.List;
+
 import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.Sprite;
@@ -19,8 +21,6 @@ public class Chaser extends Mob {
 	private int interval = 70;
 	private int xa = 1, ya = 0;
 	
-	Player player;
-	
 	public Chaser(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
@@ -31,12 +31,15 @@ public class Chaser extends Mob {
 		xa = 0;
 		ya = 0;
 		
-		player = level.getClientPlayer();
-		if (x < player.getX()) xa++;
-		if (x > player.getX()) xa--;
-		if (y < player.getY()) ya++;
-		if (y > player.getY()) ya--;
+		List<Player> players = level.getPlayers(this, 10);
 		
+		if (players.size() > 0) {
+			Player player = level.getClientPlayer();
+			if (x < player.getX()) xa++;
+			if (x > player.getX()) xa--;
+			if (y < player.getY()) ya++;
+			if (y > player.getY()) ya--;
+		}
 		if (xa !=0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
@@ -96,7 +99,7 @@ public class Chaser extends Mob {
 		
 		if (dir == Direction.LEFT) flip = 1;
 		
-		screen.renderMob(x - 16, y - 16, animSprite.getSprite(), flip);
+		screen.renderMob((int)x - 16, (int)y - 16, animSprite.getSprite(), flip);
 	}
 
 

@@ -19,17 +19,17 @@ public class Player extends Mob {
 	private AnimatedSprite animSprite = down;
 	
 	private int fireRate = 0;
-	private int speed = 2;
+	private double speed = 2.0;
 	
-	private int prevX = 0;
-	private int prevY = speed;
+	private double prevX = 0;
+	private double prevY = speed;
 	
 	public Player(Keyboard input) {
 		this.input = input;
 		animSprite = down;
 	}
 	
-	public Player(int x, int y, Keyboard input) {
+	public Player(double x, double y, Keyboard input) {
 		this.x = x;
 		this.y = y;
 		this.input = input;
@@ -38,9 +38,11 @@ public class Player extends Mob {
 	}
 	
 	public void update() {
+		System.out.println(this.x);
+		
 		animSprite.update();
 		
-		int xa = 0, ya = 0;
+		double xa = 0, ya = 0;
 		
 		if (fireRate > 0) fireRate--;
 		
@@ -96,6 +98,6 @@ public class Player extends Mob {
 		
 		if (dir == Direction.LEFT) flip = 1;
 		
-		screen.renderMob(x - 16, y - 16, animSprite.getSprite(), flip);
+		screen.renderMob((int)x - 16, (int)y - 16, animSprite.getSprite(), flip);
 	}
 }

@@ -7,7 +7,7 @@ import com.davidflyr.radtodd.level.Level;
 
 public class Entity {
 	
-	protected int x, y;
+	protected double x, y;
 	private boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();
@@ -20,11 +20,11 @@ public class Entity {
 		
 	}
 	
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 	

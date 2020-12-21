@@ -148,20 +148,42 @@ public class Level {
 		return players.get(0);
 	}
 	
-	public List<Entity> getEntities(Entity e, int radius) {
+	/*public List<Entity> getEntities(Entity e, int radius) {
+		int tileRadius = radius << 4;
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = e.getX();
-		int ey = e.getY();
+		double ex = e.getX();
+		double ey = e.getY();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			int x = entity.getX();
-			int y = entity.getY();
+			double x = entity.getX();
+			double y = entity.getY();
 			
-			int dx = Math.abs(x - ex);
-			int dy = Math.abs(y - ey);
+			double dx = Math.abs(x - ex);
+			double dy = Math.abs(y - ey);
 			
 			double distance = Math.sqrt((dx*dx) + (dy*dy));
-			if (distance <= radius) result.add(entity);
+			if (distance <= tileRadius) result.add(entity);
+		}
+		
+		return result;
+	}*/
+	
+	public List<Player> getPlayers(Entity e, int radius) {
+		int tileRadius = radius << 4;
+		List<Player> result = new ArrayList<Player>();
+		double ex = e.getX();
+		double ey = e.getY();
+		
+		for (int i = 0; i < players.size(); i++) {	
+			Player player = players.get(i);
+			double x = player.getX();
+			double y = player.getY();
+			
+			double dx = Math.abs(x - ex);
+			double dy = Math.abs(y - ey);
+			
+			double distance = Math.sqrt((dx*dx) + (dy*dy));
+			if (distance <= tileRadius) result.add(player);
 		}
 		
 		return result;
