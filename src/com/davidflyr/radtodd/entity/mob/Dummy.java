@@ -22,10 +22,13 @@ public class Dummy extends Mob {
 	private int interval = 70;
 	private double xa = 1, ya = 0;
 	
+	private static int DUMMY_COUNT = 0;
+	
 	public Dummy(double x, double y) {
 		this.x = x * 16;
 		this.y = y * 16;
 		sprite = Sprite.player_back;
+		DUMMY_COUNT++;
 	}
 	
 	public void getHit() {
@@ -93,10 +96,14 @@ public class Dummy extends Mob {
 	private void deadUpdate() {
 		sprite = Sprite.dummy_catch;
 		if (time >= deathTime) {
-			for (int i = 0; i < 2; i++) {
-				Vector2i newSpawn = SpawnLevel.dummySpawn();
+			Vector2i newSpawn = SpawnLevel.dummySpawn();
+			level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
+			
+			if (DUMMY_COUNT < 30) {
+				newSpawn = SpawnLevel.dummySpawn();
 				level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
 			}
+			DUMMY_COUNT--;
 			remove();
 		}
 	}
