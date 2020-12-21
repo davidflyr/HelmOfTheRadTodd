@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.davidflyr.radtodd.entity.Entity;
-import com.davidflyr.radtodd.entity.mob.Chaser;
 import com.davidflyr.radtodd.entity.mob.Player;
 import com.davidflyr.radtodd.entity.particle.Particle;
-import com.davidflyr.radtodd.entity.projectile.Frisbee;
 import com.davidflyr.radtodd.entity.projectile.Projectile;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.level.tile.Tile;
@@ -25,7 +23,6 @@ public class Level {
 	
 	private List<Player> players = new ArrayList<Player>();
 	
-	//public static Level spawn = new SpawnLevel("res/levels/spawn.png");
 	public static Level spawn = new SpawnLevel("spawn.png");
 	
 	public Level(int width, int height) {

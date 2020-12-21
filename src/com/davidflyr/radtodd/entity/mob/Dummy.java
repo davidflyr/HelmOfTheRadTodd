@@ -4,6 +4,8 @@ import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.Sprite;
 import com.davidflyr.radtodd.graphics.SpriteSheet;
+import com.davidflyr.radtodd.level.SpawnLevel;
+import com.davidflyr.radtodd.util.Vector2i;
 
 public class Dummy extends Mob {
 
@@ -13,8 +15,10 @@ public class Dummy extends Mob {
 	
 	private AnimatedSprite animSprite = down;
 	private boolean walking = false;
+	private boolean alive = true;
 	
 	private int time = 0;
+	private int deathTime;
 	private int interval = 70;
 	private double xa = 1, ya = 0;
 	
@@ -26,11 +30,19 @@ public class Dummy extends Mob {
 	
 	public void getHit() {
 		System.out.println("Dummy: 'I'm hit!'");
+		alive = false;
+		deathTime = time + 30;
 	}
 	
 	public void update() {
-		/*time++;
+		time++;
+		if (alive) aliveUpdate();
+		else deadUpdate();
 		
+		
+	}
+	
+	private void aliveUpdate() {
 		if (walking) animSprite.update();
 		else animSprite.setFrame(1);
 		
@@ -75,8 +87,18 @@ public class Dummy extends Mob {
 			walking = false;
 		}
 		
-		sprite = animSprite.getSprite();*/
-		
+		sprite = animSprite.getSprite();
+	}
+	
+	private void deadUpdate() {
+		sprite = Sprite.dummy_catch;
+		if (time >= deathTime) {
+			for (int i = 0; i < 2; i++) {
+				Vector2i newSpawn = SpawnLevel.dummySpawn();
+				level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
+			}
+			remove();
+		}
 	}
 
 	public void render(Screen screen) {
@@ -84,7 +106,7 @@ public class Dummy extends Mob {
 		
 		if (dir == Direction.LEFT) flip = 1;
 		
-		screen.renderMob((int)x - 16, (int)y - 16, animSprite.getSprite(), flip);
+		screen.renderMob((int)x - 16, (int)y - 16, sprite, flip);
 	}
 
 }
