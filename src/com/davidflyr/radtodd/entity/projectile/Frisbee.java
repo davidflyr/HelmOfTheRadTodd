@@ -1,5 +1,8 @@
 package com.davidflyr.radtodd.entity.projectile;
 
+import java.util.List;
+
+import com.davidflyr.radtodd.entity.Entity;
 import com.davidflyr.radtodd.entity.spawner.ParticleSpawner;
 import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
@@ -24,6 +27,14 @@ public class Frisbee extends Projectile {
 	}
 	
 	public void update() {
+		List<Entity> entities = level.getEntities(this, 10);
+		
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			entity.getHit();
+			remove();
+		}
+		
 		if (level.tileCollision((int)(x + nx), (int)(y + ny), 6, 3, 5)) {
 			level.add(new ParticleSpawner((int)x, (int)y, 20, 50, level));
 			remove();

@@ -9,7 +9,6 @@ public abstract class Projectile extends Entity {
 	
 	protected final double xOrigin, yOrigin;
 	protected double angle;
-	protected double x, y;
 	protected Sprite sprite;
 	protected double nx, ny;
 	protected double distance;
@@ -23,6 +22,10 @@ public abstract class Projectile extends Entity {
 		angle = dir;
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void update() {
+		
 	}
 	
 	public Sprite getSprite() {

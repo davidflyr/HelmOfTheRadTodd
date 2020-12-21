@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.davidflyr.radtodd.entity.Entity;
+import com.davidflyr.radtodd.entity.mob.Chaser;
 import com.davidflyr.radtodd.entity.mob.Player;
 import com.davidflyr.radtodd.entity.particle.Particle;
+import com.davidflyr.radtodd.entity.projectile.Frisbee;
 import com.davidflyr.radtodd.entity.projectile.Projectile;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.level.tile.Tile;
@@ -148,8 +150,7 @@ public class Level {
 		return players.get(0);
 	}
 	
-	/*public List<Entity> getEntities(Entity e, int radius) {
-		int tileRadius = radius << 4;
+	public List<Entity> getEntities(Entity e, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		double ex = e.getX();
 		double ey = e.getY();
@@ -161,15 +162,17 @@ public class Level {
 			double dx = Math.abs(x - ex);
 			double dy = Math.abs(y - ey);
 			
+			
 			double distance = Math.sqrt((dx*dx) + (dy*dy));
-			if (distance <= tileRadius) result.add(entity);
+			if (distance <= radius) {
+				result.add(entity);
+			}
 		}
 		
 		return result;
-	}*/
+	}
 	
 	public List<Player> getPlayers(Entity e, int radius) {
-		int tileRadius = radius << 4;
 		List<Player> result = new ArrayList<Player>();
 		double ex = e.getX();
 		double ey = e.getY();
@@ -183,7 +186,7 @@ public class Level {
 			double dy = Math.abs(y - ey);
 			
 			double distance = Math.sqrt((dx*dx) + (dy*dy));
-			if (distance <= tileRadius) result.add(player);
+			if (distance <= radius) result.add(player);
 		}
 		
 		return result;

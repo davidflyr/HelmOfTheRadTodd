@@ -20,6 +20,9 @@ public class Entity {
 		
 	}
 	
+	public void getHit() {
+	}
+	
 	public double getX() {
 		return x;
 	}

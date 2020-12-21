@@ -24,8 +24,12 @@ public class Dummy extends Mob {
 		sprite = Sprite.player_back;
 	}
 	
+	public void getHit() {
+		System.out.println("Dummy: 'I'm hit!'");
+	}
+	
 	public void update() {
-		time++;
+		/*time++;
 		
 		if (walking) animSprite.update();
 		else animSprite.setFrame(1);
@@ -71,7 +75,7 @@ public class Dummy extends Mob {
 			walking = false;
 		}
 		
-		sprite = animSprite.getSprite();
+		sprite = animSprite.getSprite();*/
 		
 	}
 

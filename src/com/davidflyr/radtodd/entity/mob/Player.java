@@ -38,8 +38,6 @@ public class Player extends Mob {
 	}
 	
 	public void update() {
-		System.out.println(this.x);
-		
 		animSprite.update();
 		
 		double xa = 0, ya = 0;

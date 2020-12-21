@@ -31,7 +31,7 @@ public class Chaser extends Mob {
 		xa = 0;
 		ya = 0;
 		
-		List<Player> players = level.getPlayers(this, 10);
+		List<Player> players = level.getPlayers(this, 160);
 		
 		if (players.size() > 0) {
 			Player player = level.getClientPlayer();
@@ -46,6 +46,10 @@ public class Chaser extends Mob {
 		} else {
 			walking = false;
 		}
+	}
+	
+	public void getHit() {
+		System.out.println("Chaser: 'I'm hit!'");
 	}
 	
 	public void update() {
