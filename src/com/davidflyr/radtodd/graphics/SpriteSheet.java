@@ -13,6 +13,7 @@ public class SpriteSheet {
 	public int[] pixels;
 	
 	public static SpriteSheet tiles = new SpriteSheet("spritesheet.png", 256);
+	public static SpriteSheet dummy_catch = new SpriteSheet(tiles, 3, 4, 1, 4, 32);
 	public static SpriteSheet spawn_level = new SpriteSheet("spawn_level.png", 48);
 	public static SpriteSheet projectile_wizard = new SpriteSheet("wizard.png", 48);
 	

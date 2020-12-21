@@ -12,6 +12,7 @@ public class Dummy extends Mob {
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 4, 10);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 4, 10);
 	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.dummy_side, 32, 32, 4, 10);
+	private AnimatedSprite dummy_catch = new AnimatedSprite(SpriteSheet.dummy_catch, 32, 32, 4, 8);
 	
 	private AnimatedSprite animSprite = down;
 	private boolean walking = false;
@@ -35,6 +36,7 @@ public class Dummy extends Mob {
 		System.out.println("Dummy: 'I'm hit!'");
 		alive = false;
 		deathTime = time + 30;
+		animSprite = dummy_catch;
 	}
 	
 	public void update() {
@@ -94,7 +96,8 @@ public class Dummy extends Mob {
 	}
 	
 	private void deadUpdate() {
-		sprite = Sprite.dummy_catch;
+		animSprite.update();
+		sprite = animSprite.getSprite();
 		if (time >= deathTime) {
 			Vector2i newSpawn = SpawnLevel.dummySpawn();
 			level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
