@@ -29,6 +29,7 @@ public class Sprite {
 	public static Sprite player_forward   = new Sprite(32, 1, 7, SpriteSheet.tiles);
 	public static Sprite player_back      = new Sprite(32, 0, 7, SpriteSheet.tiles);
 	public static Sprite player_side      = new Sprite(32, 2, 7, SpriteSheet.tiles);
+	public static Sprite dummy_catch	  = new Sprite(32, 3, 7, SpriteSheet.tiles);
 	
 	public static Sprite player_forward_1 = new Sprite(32, 1, 6, SpriteSheet.tiles);
 	public static Sprite player_forward_2 = new Sprite(32, 1, 5, SpriteSheet.tiles);

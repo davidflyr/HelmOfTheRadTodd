@@ -23,7 +23,6 @@ public class Level {
 	
 	private List<Player> players = new ArrayList<Player>();
 	
-	//public static Level spawn = new SpawnLevel("res/levels/spawn.png");
 	public static Level spawn = new SpawnLevel("spawn.png");
 	
 	public Level(int width, int height) {
@@ -148,8 +147,7 @@ public class Level {
 		return players.get(0);
 	}
 	
-	/*public List<Entity> getEntities(Entity e, int radius) {
-		int tileRadius = radius << 4;
+	public List<Entity> getEntities(Entity e, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		double ex = e.getX();
 		double ey = e.getY();
@@ -161,15 +159,17 @@ public class Level {
 			double dx = Math.abs(x - ex);
 			double dy = Math.abs(y - ey);
 			
+			
 			double distance = Math.sqrt((dx*dx) + (dy*dy));
-			if (distance <= tileRadius) result.add(entity);
+			if (distance <= radius) {
+				result.add(entity);
+			}
 		}
 		
 		return result;
-	}*/
+	}
 	
 	public List<Player> getPlayers(Entity e, int radius) {
-		int tileRadius = radius << 4;
 		List<Player> result = new ArrayList<Player>();
 		double ex = e.getX();
 		double ey = e.getY();
@@ -183,7 +183,7 @@ public class Level {
 			double dy = Math.abs(y - ey);
 			
 			double distance = Math.sqrt((dx*dx) + (dy*dy));
-			if (distance <= tileRadius) result.add(player);
+			if (distance <= radius) result.add(player);
 		}
 		
 		return result;

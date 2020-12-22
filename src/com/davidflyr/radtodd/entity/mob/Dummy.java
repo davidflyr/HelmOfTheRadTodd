@@ -4,29 +4,50 @@ import com.davidflyr.radtodd.graphics.AnimatedSprite;
 import com.davidflyr.radtodd.graphics.Screen;
 import com.davidflyr.radtodd.graphics.Sprite;
 import com.davidflyr.radtodd.graphics.SpriteSheet;
+import com.davidflyr.radtodd.level.SpawnLevel;
+import com.davidflyr.radtodd.util.Vector2i;
 
 public class Dummy extends Mob {
 
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 4, 10);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 4, 10);
 	private AnimatedSprite side = new AnimatedSprite(SpriteSheet.dummy_side, 32, 32, 4, 10);
+	private AnimatedSprite dummy_catch = new AnimatedSprite(SpriteSheet.dummy_catch, 32, 32, 4, 8);
 	
 	private AnimatedSprite animSprite = down;
 	private boolean walking = false;
+	private boolean alive = true;
 	
 	private int time = 0;
+	private int deathTime;
 	private int interval = 70;
 	private double xa = 1, ya = 0;
+	
+	private static int DUMMY_COUNT = 0;
 	
 	public Dummy(double x, double y) {
 		this.x = x * 16;
 		this.y = y * 16;
 		sprite = Sprite.player_back;
+		DUMMY_COUNT++;
+	}
+	
+	public void getHit() {
+		System.out.println("Dummy: 'I'm hit!'");
+		alive = false;
+		deathTime = time + 30;
+		animSprite = dummy_catch;
 	}
 	
 	public void update() {
 		time++;
+		if (alive) aliveUpdate();
+		else deadUpdate();
 		
+		
+	}
+	
+	private void aliveUpdate() {
 		if (walking) animSprite.update();
 		else animSprite.setFrame(1);
 		
@@ -72,7 +93,22 @@ public class Dummy extends Mob {
 		}
 		
 		sprite = animSprite.getSprite();
-		
+	}
+	
+	private void deadUpdate() {
+		animSprite.update();
+		sprite = animSprite.getSprite();
+		if (time >= deathTime) {
+			Vector2i newSpawn = SpawnLevel.dummySpawn();
+			level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
+			
+			if (DUMMY_COUNT < 30) {
+				newSpawn = SpawnLevel.dummySpawn();
+				level.add(new Dummy(newSpawn.getX(), newSpawn.getY()));
+			}
+			DUMMY_COUNT--;
+			remove();
+		}
 	}
 
 	public void render(Screen screen) {
@@ -80,7 +116,7 @@ public class Dummy extends Mob {
 		
 		if (dir == Direction.LEFT) flip = 1;
 		
-		screen.renderMob((int)x - 16, (int)y - 16, animSprite.getSprite(), flip);
+		screen.renderMob((int)x - 16, (int)y - 16, sprite, flip);
 	}
 
 }

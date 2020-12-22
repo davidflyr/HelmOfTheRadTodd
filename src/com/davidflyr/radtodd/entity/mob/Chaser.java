@@ -31,21 +31,23 @@ public class Chaser extends Mob {
 		xa = 0;
 		ya = 0;
 		
-		List<Player> players = level.getPlayers(this, 10);
+		Player player = level.getClientPlayer();
 		
-		if (players.size() > 0) {
-			Player player = level.getClientPlayer();
-			if (x < player.getX()) xa++;
-			if (x > player.getX()) xa--;
-			if (y < player.getY()) ya++;
-			if (y > player.getY()) ya--;
-		}
+		if (x < player.getX()) xa++;
+		if (x > player.getX()) xa--;
+		if (y < player.getY()) ya++;
+		if (y > player.getY()) ya--;
+		
 		if (xa !=0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
 		} else {
 			walking = false;
 		}
+	}
+	
+	public void getHit() {
+		System.out.println("Chaser: 'I'm hit!'");
 	}
 	
 	public void update() {

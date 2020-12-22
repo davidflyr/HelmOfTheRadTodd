@@ -2,11 +2,13 @@ package com.davidflyr.radtodd.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import com.davidflyr.radtodd.entity.mob.Chaser;
 import com.davidflyr.radtodd.entity.mob.Dummy;
+import com.davidflyr.radtodd.util.Vector2i;
 
 public class SpawnLevel extends Level {
 	
@@ -29,7 +31,22 @@ public class SpawnLevel extends Level {
 		add(new Chaser(22, 23));
 	}
 	
-	protected void generateLevel() {
+	public static Vector2i dummySpawn() {
+		Random random = new Random();
+		int pick = random.nextInt(5);
 		
+		switch (pick) {
+		case 0:
+			return new Vector2i(24, 26);
+		case 1:
+			return new Vector2i(20, 13);
+		case 2:
+			return new Vector2i(13, 35);
+		case 3:
+			return new Vector2i(26, 48);
+		case 4:
+			return new Vector2i(19, 64);
+		}
+		return null;
 	}
 }

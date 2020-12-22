@@ -20,6 +20,9 @@ public class Entity {
 		
 	}
 	
+	public void getHit() {
+	}
+	
 	public double getX() {
 		return x;
 	}
@@ -29,7 +32,6 @@ public class Entity {
 	}
 	
 	public void remove() {
-		// Remove from level
 		removed = true;
 	}
 	
