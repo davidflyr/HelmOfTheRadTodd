@@ -29,7 +29,7 @@ public class Frisbee extends Projectile {
 	}
 	
 	public void update() {
-		List<Entity> entities = level.getEntities(this, 10);
+		List<Entity> entities = level.getEntities(this, 12);
 		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);

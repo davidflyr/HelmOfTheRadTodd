@@ -27,8 +27,11 @@ public class SpawnLevel extends Level {
 			e.printStackTrace();
 			System.out.println("Whoops! Couldn't load level file.");
 		}
-		add(new Dummy(24, 26));
-		add(new Chaser(22, 23));
+		for (int i = 0; i < 30; i++) {
+			Vector2i spawn = dummySpawn();
+			add(new Dummy(spawn.getX(), spawn.getY()));
+		}
+		add(new Chaser(24, 26));
 	}
 	
 	public static Vector2i dummySpawn() {
